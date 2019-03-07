@@ -1,20 +1,25 @@
 package CSED;
+
+import java.math.BigInteger;
+
 public class Fabbonacci {
 	
-	public static  long findFabOfIndex(int index)
-	//RETURN LONG TO AVOID INT OVERFLOW
+	public  BigInteger findFabOfIndex(int index)
 	{
-		long fab1 = 0 ;
-		long fab2 = 1;
-		long temp = 0;
+		BigInteger fab1 = new BigInteger("0");
+		BigInteger fab2 = new BigInteger("1");
+		BigInteger temp = new BigInteger("0");
+		//long fab1 = 0 ;
+		//long fab2 = 1;
+		//long temp = 0;
 		if(index<=0)
 		{
 			System.out.print("INVALID THE INDEX ");
-			return 0;
+			return BigInteger.ZERO;
 		}else if (index==1)
 		{
-			return 1;
-		}else if (index >93)
+			return BigInteger.ONE;
+		}else if (index >930)
 		{
 			System.out.print("THE MAXIMUM INDEX AVAILABLE IS 93");
 			System.out.print("FAB OF 93 IS ");
@@ -25,12 +30,14 @@ public class Fabbonacci {
 			{
 				temp = fab1;
 				fab1 = fab2;
-				fab2 +=temp; 
+				fab2 =fab2.add(temp); 
+			//BigInteger add(BigInteger val)
 			}
 			
 		
 		return fab2; 
 	}
+
 
 
 }
