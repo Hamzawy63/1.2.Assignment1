@@ -1,0 +1,91 @@
+///THIS IS ONLY THE CODE OF THE PROBLEM ON A TEXT EDITOR
+
+
+package CSED;
+
+public class MySpecialArrayUtils {
+	 public static  void reverse(int[] arr)
+	 {
+		 int i,temp,j; ///counter 
+		 for(i=0,j=arr.length-1;i<arr.length/2;i++,j--)
+		 {
+			 temp = arr[i];
+			 arr[i]= arr[j];
+			 arr[j] = temp;
+			
+		 }
+		 
+	 }
+	 public static  int[] sumEvenOdd(int[] arr)
+	 {
+		 //int Final[] = new int [2];
+		int [] Final = {0,0};
+		 for(int i=0;i<arr.length;i++)
+		 {
+			 if(arr[i]%2==0)
+				 {Final[0] +=arr[i];}
+			 else 
+				 {Final[1]+=arr[i];}
+
+			
+		 }
+		 return Final;
+		 
+	 }
+	 public static  double average(int[] arr)
+	{
+		 double average=0;
+		 int i;
+		 for(i =0;i<arr.length;i++)
+		 {
+			 average += arr[i]; ///THE AVERAGE IS THE SUM OF ARRAY ELEMENTS  TILL NOW
+			 
+		 }
+		 return average/i;
+		
+	}
+	 
+	public static  void moveValue(int[] arr, int val) 
+	{
+		int i,j; ///counters 
+		for(i =0;i<arr.length;i++)
+		{
+			if(arr[i]==val)
+			{
+				///A LOOP TO SHIFT ALL THE REST ELEMENT
+				for(j=i;j<arr.length-1;j++)
+				{
+					arr[j]= arr[j+1];						
+				}				
+			
+			}					
+		}
+		///NOW THE LAST 2 ELEMENTS ARE THE SAME 
+		arr[arr.length-1]=val;
+		
+	}
+	
+	public static  void transpose(int[][] arr) 
+	{
+		/**
+		 * this IS  o(n^2) solution there is a lot others o(n) AS 
+		 * THERE IS ASSUMPTION THAT THE ARRAY IS M*M
+		**/
+		//int m = arr.length; ///THE ARRAY IS M*M
+		for(int i = 0;i<arr.length;i++)
+		{
+			for(int j = 0;i<arr.length;i++)
+			{
+				
+				 int temp  = arr[i][j];
+				 arr[i][j] = arr[j][i];
+				 arr[j][i] = temp;
+				
+			}
+		}
+		
+			
+	}
+	
+
+}
