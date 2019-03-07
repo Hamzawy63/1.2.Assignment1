@@ -1,7 +1,5 @@
-///THIS IS ONLY THE CODE OF THE PROBLEM ON A TEXT EDITOR
+///the methods only
 
-
-package CSED;
 
 public class MySpecialArrayUtils {
 	 public static  void reverse(int[] arr)
@@ -45,47 +43,43 @@ public class MySpecialArrayUtils {
 		
 	}
 	 
-	public static  void moveValue(int[] arr, int val) 
-	{
-		int i,j; ///counters 
-		for(i =0;i<arr.length;i++)
+	 public  void moveValue(int[] arr, int val) 
 		{
-			if(arr[i]==val)
+			int i,j,k=1,temp; ///counters
+			for(i =0;i<arr.length+1-k;i++)
 			{
-				///A LOOP TO SHIFT ALL THE REST ELEMENT
-				for(j=i;j<arr.length-1;j++)
+				if(arr[i]==val)
 				{
-					arr[j]= arr[j+1];						
-				}				
-			
-			}					
+
+					///A LOOP TO SHIFT ALL THE REST ELEMENT
+					for(j=i;j<arr.length-k;j++)
+					{
+						temp = arr[j];
+						arr[j]= arr[j+1];
+						arr[j+1] = temp;
+					}
+					/// IMPORTANT
+					i--;
+					k++;
+				}
+			}	
 		}
-		///NOW THE LAST 2 ELEMENTS ARE THE SAME 
-		arr[arr.length-1]=val;
 		
-	}
 	
-	public static  void transpose(int[][] arr) 
+	public  void transpose(int[][] arr) 
 	{
-		/**
-		 * this IS  o(n^2) solution there is a lot others o(n) AS 
-		 * THERE IS ASSUMPTION THAT THE ARRAY IS M*M
-		**/
-		//int m = arr.length; ///THE ARRAY IS M*M
+		
+		int m = arr.length; ///THE ARRAY IS M*M
 		for(int i = 0;i<arr.length;i++)
 		{
-			for(int j = 0;i<arr.length;i++)
-			{
-				
+			for(int j = i;j<arr.length;j++)
+			{				
 				 int temp  = arr[i][j];
 				 arr[i][j] = arr[j][i];
-				 arr[j][i] = temp;
-				
+				 arr[j][i] = temp;				
 			}
-		}
+		}	
+	}
 		
 			
 	}
-	
-
-}
