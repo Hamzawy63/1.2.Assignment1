@@ -42,7 +42,7 @@ public class MySpecialArrayUtils {
 		
 	}
 	 
-	 public  void moveValue(int[] arr, int val) 
+	 public  static void moveValue(int[] arr, int val) 
 		{
 			int i,j,k=1,temp; ///counters
 			for(i =0;i<arr.length+1-k;i++)
@@ -62,14 +62,11 @@ public class MySpecialArrayUtils {
 					k++;
 				}
 			}
-			///NOW THE LAST 2 ELEMENTS ARE THE SAME if there  is a value  
-		//	if(found == 1) 
-				//arr[arr.length-1]=val;
 			
 		}
 		
 	
-	public  void transpose(int[][] arr) 
+	public  static void transpose(int[][] arr) 
 	{
 		
 		int m = arr.length; ///THE ARRAY IS M*M
