@@ -181,6 +181,7 @@ public class myMain {
 
 
     }
+     /**
     public static  void main (String[] args )
     {
         player ref = new player();
@@ -191,11 +192,7 @@ public class myMain {
         {
             System.out.println(myFuckingPoints[i]);
         }
-
-
-
-
-
     }
+    **/
 
 }
