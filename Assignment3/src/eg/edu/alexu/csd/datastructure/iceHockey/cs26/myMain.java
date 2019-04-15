@@ -13,6 +13,11 @@ public class myMain {
     {
         public  java.awt.Point[] findPlayers(String[] photo, int team, int threshold)
         {
+            if(photo.length == 0) {
+             //   System.out.println("Empty photo!");
+                Point[] Picture  =  new Point[1];
+                return  Picture;
+            }
             char k = Integer.toString(team).charAt(0);
             Point[] Picture = new Point[100];
             char[][] photoArr = to2dArr(photo);
@@ -141,26 +146,36 @@ public class myMain {
                teamPoints[ctr++] = new Point(minY+maxY+1,minX+maxX+1);
 
             }
-            return (teamPoints);
+            return sort(teamPoints);
         }
-        public Point[] sort(Point[] teamPositions )
+        public Point[] sort(Point[] teamPositions ) /// insertion sort
         {
             Point[] teamPoints = new Point[teamPositions.length];
             int minX = teamPositions[0].x;
             int index =0;
             int cnt = 0;
-            for(int i =0 ;i<teamPositions.length;i++ )
+            for(int i = 0 ; i<teamPositions.length;i++ )
             {
-                if(teamPositions[i].x < minX )
+                for(int j= i ;j<teamPositions.length ;j++)
                 {
-                    minX = teamPositions[i].x;
-                    index = i;
+                    if(teamPositions[i].x > teamPositions[j].x )
+                    {
+                        Point tmp = teamPositions[i];
+                        teamPositions[i] = teamPositions[j];
+                        teamPositions[j] = tmp ;
+
+                    }else if (teamPositions[i].x == teamPositions[j].x)
+                    {
+                        if(teamPositions[i].y > teamPositions[j].y)
+                        {
+                            Point tmp = teamPositions[i];
+                            teamPositions[i] = teamPositions[j];
+                            teamPositions[j] = tmp ;
+                        }
+                    }
                 }
-                teamPoints[cnt++] = teamPositions[index];
-
             }
-
-            return  teamPoints;
+            return  teamPositions;
         }
 
 
@@ -169,9 +184,9 @@ public class myMain {
     public static  void main (String[] args )
     {
         player ref = new player();
-        String[] a ={ "44444H44S4", "K444K4L444","4LJ44T44XH","444O4VIF44", "44C4D4U444","4V4Y4KB4M4","G4W4HP4O4W", "4444ZDQ4S4","4BR4Y4A444","4G4V4T4444"};
+        String[] a ={};
         Point[] myFuckingPoints = new Point[15];
-        myFuckingPoints = ref.findPlayers(a,4,16);
+        myFuckingPoints = ref.findPlayers(a,8,9);
         for(int i =0 ;i<myFuckingPoints.length;i++)
         {
             System.out.println(myFuckingPoints[i]);
