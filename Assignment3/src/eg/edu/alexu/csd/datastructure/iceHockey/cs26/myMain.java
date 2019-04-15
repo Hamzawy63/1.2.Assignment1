@@ -141,7 +141,7 @@ public class myMain {
                teamPoints[ctr++] = new Point(minY+maxY+1,minX+maxX+1);
 
             }
-            return sort(teamPoints);
+            return (teamPoints);
         }
         public Point[] sort(Point[] teamPositions )
         {
