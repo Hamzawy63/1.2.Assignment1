@@ -4,6 +4,8 @@ import org.w3c.dom.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class myMain {
@@ -14,14 +16,10 @@ public class myMain {
             char k = Integer.toString(team).charAt(0);
             Point[] Picture = new Point[100];
             char[][] photoArr = to2dArr(photo);
-            ArrayList<LinkedList<Point>> allIndexes = new ArrayList<>();
-            LinkedList<Point> index = new LinkedList<>();
+            ArrayList<ArrayList<Point>> allIndexes = new ArrayList<>();
+            ArrayList<Point> index = new ArrayList<>();
             searchForPlayers(photoArr,k,threshold,index,allIndexes);
-            getPoints(allIndexes);
-
-
-
-            return Picture;
+            return getPoints(allIndexes);
         }
         public char[][] to2dArr(String[] photo)
         {
@@ -35,7 +33,7 @@ public class myMain {
             }
             return  arr;
         }
-        public void  checkMove(int i,int j ,char [][]arr,char  k,LinkedList<Point> index  ) /// value is k
+        public void  checkMove(int i,int j ,char [][]arr,char  k,ArrayList<Point> index  ) /// value is k
         {
             if( isValid(i,j,arr))
             {
@@ -58,8 +56,9 @@ public class myMain {
             return false;
         }
 
-        public int searchForPlayers(char [][]arr,char k,int threshold,LinkedList<Point> index, ArrayList<LinkedList<Point>> allIndexes)
+        public void searchForPlayers(char [][]arr,char k,int threshold,ArrayList<Point> index, ArrayList<ArrayList<Point>> allIndexes)
         {
+
             int cnt = 0; ///counter on the arraylist index
             int [][]visited = new int[arr.length][arr[0].length];
             for(int i = 0 ;i<arr.length ;i++ )
@@ -69,26 +68,39 @@ public class myMain {
                   if(isValid(i,j,arr) && arr[i][j] == k )
                   {
                       /// mark groups  (Recursive case )
+                  //    visited[i][j] =1;
                       arr[i][j] = '*';
+                      index.add(new Point(i,j));
                       checkMove(i,j+1,arr,k,index);
                       checkMove(i,j-1,arr,k,index);
                       checkMove(i+1,j,arr,k,index);
                       checkMove(i-1,j,arr,k,index);
                       /// search for the area
-                      if(getArea(i,j,arr,visited)<threshold)
+                      int uselessbutuseful = getArea(i,j,arr,visited) ;
+                      if(4*uselessbutuseful<threshold)
                       {
+                          index.clear();
                           continue;
                       }
                       else
                       {
                           ///record the index and calc the point
-                          allIndexes.add(index);
+                          /**
+                          for(Point x : index)
+                          {
+                              allIndexes.get(cnt).add(x);
+                          }
+                           **/
+                          allIndexes.add(cnt,new ArrayList<Point>(1));
+                          allIndexes.get(cnt++).addAll(index);
+                          index.clear();
                           /// and store it in a game
+
                       }
                   }
                 }
             }
-            return 0;
+
         }
 
         public int getArea(int i,int j,char [][]arr,int [][]visited)
@@ -97,39 +109,58 @@ public class myMain {
                 return 0;
             visited[i][j] = 1;
             int x = getArea(i+1,j,arr,visited);
-             x = getArea(i-1,j,arr,visited);
-             x = getArea(i,j+1,arr,visited);
-             x = getArea(i,j-1,arr,visited);
-            return  1
-                    +getArea(i+1,j,arr,visited)
-                    +getArea(i-1,j,arr,visited)
-                    +getArea(i,j+1,arr,visited)
-                    +getArea(i,j-1,arr,visited);
+            int y = getArea(i-1,j,arr,visited);
+            int z = getArea(i,j+1,arr,visited);
+            int m = getArea(i,j-1,arr,visited);
+
+            return  (1+x+y+z+m);
+
         }
-        public Point[] getPoints(ArrayList <LinkedList<Point>> allIndexes)
+        public Point[] getPoints(ArrayList <ArrayList<Point>> allIndexes)
         {
             Point[] teamPoints = new Point[allIndexes.size()];
             int ctr = 0;
             for(int i =0 ;i<allIndexes.size();i++ )
             {
-                Point teamIndex = new Point(allIndexes.get(0).get(0));  /// first point
+                Point teamIndex = new Point(allIndexes.get(i).get(0));  /// first point
+                int minX = teamIndex.x,minY =teamIndex.y,maxX =teamIndex.x,maxY =teamIndex.y;
 
                for(Point j : allIndexes.get(i))
                {
-                   if(j.x < teamIndex.x)
-                   {
-                       teamIndex.x = j.x;
-                   }
-                   if (j.y>teamIndex.y)
-                   {
-                       teamIndex.y = j.y;
-                   }
+                   if(j.x > maxX)
+                       maxX = j.x;
+                   else if(j.x<minX)
+                       maxY = j.y;
+
+
+                   if(j.y > maxY)
+                       maxY = j.y;
+                   else if (j.y<minY)
+                       minY = j.y;
                }
-               teamIndex.x+=1;
-               teamIndex.y+=1;
-               teamPoints[ctr++] = teamIndex;
+               teamPoints[ctr++] = new Point(minY+maxY+1,minX+maxX+1);
+
             }
-            return teamPoints;
+            return sort(teamPoints);
+        }
+        public Point[] sort(Point[] teamPositions )
+        {
+            Point[] teamPoints = new Point[teamPositions.length];
+            int minX = teamPositions[0].x;
+            int index =0;
+            int cnt = 0;
+            for(int i =0 ;i<teamPositions.length;i++ )
+            {
+                if(teamPositions[i].x < minX )
+                {
+                    minX = teamPositions[i].x;
+                    index = i;
+                }
+                teamPoints[cnt++] = teamPositions[index];
+
+            }
+
+            return  teamPoints;
         }
 
 
@@ -138,9 +169,9 @@ public class myMain {
     public static  void main (String[] args )
     {
         player ref = new player();
-        String[] a ={ "33JUBU33", "3U3O4433","O33P44NB","PO3NSDP3","VNDSD333","OINFD33X"};
-        Point[] myFuckingPoints = new Point[4];
-        myFuckingPoints = ref.findPlayers(a,3,16);
+        String[] a ={ "44444H44S4", "K444K4L444","4LJ44T44XH","444O4VIF44", "44C4D4U444","4V4Y4KB4M4","G4W4HP4O4W", "4444ZDQ4S4","4BR4Y4A444","4G4V4T4444"};
+        Point[] myFuckingPoints = new Point[15];
+        myFuckingPoints = ref.findPlayers(a,4,16);
         for(int i =0 ;i<myFuckingPoints.length;i++)
         {
             System.out.println(myFuckingPoints[i]);
