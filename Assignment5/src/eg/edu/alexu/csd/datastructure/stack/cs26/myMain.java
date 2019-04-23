@@ -3,18 +3,19 @@ package eg.edu.alexu.csd.datastructure.stack.cs26;
 public class myMain {
 
     public static void main(String[] args) {
-        try {
-            System.out.println(divide(10,0));
-        }catch ( IllegalArgumentException ex)
-        {
-            System.out.println(ex.getMessage());
-        }
-
+    	
+    	infixToPostfix itp = new infixToPostfix();
+    	//String infix = "(A+B/C*(D+E)-F)";
+    	//String infix = "((A+B)- C*(D/E))+F";
+    	//String infix = "A +B + C+ D"; ///  out :	A B + C + D +
+    	//String infix = "(A + B) * (C + D)"; // out :	A B + C D + *
+    	// infix = "A + B * C + D"; // out : 	A B C * + D +
+    	//String infix = "A * B + C * D"; // out : A B * C D * +
+    	//String infix = "A * B + C * D"; // out : A B * C D * +
+    	//String infix = " "; // out no response
+    	String infix = "(((A+B)*C)-((D-E)*(F+G)))";  // out : AB+C*DE-FG+*-
+    	System.out.println(itp.convertToPostfix(infix));
+    
     }
-    public static  int  divide(int a,int b)
-    {
-        if(b==0)
-            throw new IllegalArgumentException("Divisor can not be zero");
-        return a/b;
-    }
+    
 }
