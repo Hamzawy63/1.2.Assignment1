@@ -1,6 +1,5 @@
 package eg.edu.alexu.csd.datastructure.stack.cs26;
 
-
 /**
  *  I WILL USE LINKEDLIST TO IMPLEMENT THE STACK
  */

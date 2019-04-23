@@ -1,8 +1,16 @@
 package eg.edu.alexu.csd.datastructure.stack.cs26;
 
+/**
+ * Person
+ * Created on July,4,2019
+ * @author Hamza Hassan <a href ="https://www.facebook.com/profile.php?id=100008794203326">Click for Facebook</a>
+ */
 public class infixToPostfix {
-	
-
+/**
+ * we use it to make it easy for determining the priority in the stack
+ * @param x a symbol character 
+ * @return priority of the character entered 
+ */
 public int priority(char x)
 {
 	if(x == '+'||x == '-')
@@ -13,20 +21,39 @@ public int priority(char x)
 	return 0;  // in case of we have  character
 }
 //public boolean is
+/**
+ * @param x  a symbol character
+ *  @param y  a symbol character
+ * @return a boolean of lower priority
+ */
 public boolean isLowerPriority(char x,char y)
 {
 	if(priority(x) <= priority(y))
 		return true;
 	return false;
 }
+/**
+ * @param x  a symbol 
+ * @return true if it is one of symbols allowed to exsist in the expression  (+,-,&amp;,/,(,)) 
+ */
 public boolean isSymbol(char x)
 {
 	return x =='+'||x =='-'||x =='*'||x =='/'||x =='('||x ==')';
 }
+/**
+ * @param x a symbol 
+ * @return true if it is one of operaors allowed to exsist in the expression (+,-,&amp;,/)
+ */
 public boolean isOperator(char x)
 {
 	return x =='+'||x =='-'||x =='*'||x =='/';
 }
+/**
+ * check if the user entered a valid input or not 
+ * invalid inputs may be like an open parenthesis or more than one operator in sequence or empty parenthesis
+ * @param infix the string the user entered
+ * @return true if there is no problems (e.g. all parentheses are closed..)
+ */
 public boolean validInput(String infix)
 {
 	Stack paranthesis = new Stack();
@@ -67,7 +94,10 @@ public boolean validInput(String infix)
 	return false;
 }
 
-
+/**
+ * @param infix the string the user entered
+ * @return  postfix expression 
+ */
 public String convertToPostfix(String infix)
 {
 	String postfix = "";

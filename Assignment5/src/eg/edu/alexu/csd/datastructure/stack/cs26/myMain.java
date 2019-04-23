@@ -58,6 +58,7 @@ public class myMain {
     
 }
 /**
+ // >> ALL THOSE CASES GENERATED CORRECT ANSWER
  infixToPostfix itp = new infixToPostfix();
  String infix1 = "(A+B/C*(D+E)-F)";
  System.out.println(itp.convertToPostfix(infix1));

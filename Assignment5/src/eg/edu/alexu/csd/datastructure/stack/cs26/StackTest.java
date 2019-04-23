@@ -1,8 +1,9 @@
 
-/**
 package eg.edu.alexu.csd.datastructure.stack.cs26;
-
-
+/*
+ * made by eclipse
+ * CAN NOT BE OPENED IN INTELLIJ
+ */
 
 import org.junit.jupiter.api.Test;
 
@@ -40,10 +41,4 @@ class StackTest {
 		// TODO Auto-generated method stub
 		
 	}
-
-		
-	
-	
-
 }
-**/
