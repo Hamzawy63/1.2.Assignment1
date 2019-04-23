@@ -32,28 +32,35 @@ public boolean validInput(String infix)
 	Stack paranthesis = new Stack();
 	for(int i =0 ;i<infix.length() ;i++)
     {
-        if(infix.charAt(i) == '(') {
-            paranthesis.push('(');
-            if(i == infix.length()-1)
-                return false;
-            else if(isOperator(infix.charAt(i+1)) )
-                return false ;
-            else  if (infix.charAt(i+1) == ')') // empty paranthersis
-                return false;
+        if((Character.isDigit(infix.charAt(i)) || Character.isAlphabetic(infix.charAt(i)) || isSymbol(infix.charAt(i)) || infix.charAt(i) == ' ')||infix.charAt(i) == '\t')
+        {
+            if(infix.charAt(i) == '(') {
+                paranthesis.push('(');
+                if(i == infix.length()-1)
+                    return false;
+                else if(isOperator(infix.charAt(i+1)) )
+                    return false ;
+                else  if (infix.charAt(i+1) == ')') // empty paranthersis
+                    return false;
 
-        }else if (infix.charAt(i) == ')' )
+            }else if (infix.charAt(i) == ')' )
+            {
+                if(paranthesis.isEmpty())
+                    return false;
+                else
+                    paranthesis.pop();
+            }else if (isOperator(infix.charAt(i)))
+            {
+                if(i == (paranthesis.size()-1))
+                    return false;
+                else if(isOperator(infix.charAt(i+1)))
+                    return false;
+            }
+        }else
         {
-            if(paranthesis.isEmpty())
-                return false;
-            else
-                paranthesis.pop();
-        }else if (isOperator(infix.charAt(i)))
-        {
-            if(i == (paranthesis.size()-1))
-                return false;
-            else if(isOperator(infix.charAt(i+1)))
-                return false;
+            return false;
         }
+
     }
 	if(paranthesis.isEmpty())
 	    return true;

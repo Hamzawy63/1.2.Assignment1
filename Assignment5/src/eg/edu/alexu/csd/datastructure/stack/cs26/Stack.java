@@ -9,7 +9,12 @@ public class Stack implements IStack {
 
     public Object pop()
     {
+
         Object element = myStack.getFirst(); //my head
+
+        if(element == null)
+            return null;
+
         myStack.removeAtFirst();
         return element;
     }
