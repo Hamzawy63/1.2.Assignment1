@@ -53,8 +53,8 @@ public class InfiixToPostfixTest {
 		assertEquals(28,(itp.evaluate(itp.infixToPostfix(infix))));
 		infix = "(12 / 0) * 7";
 		assertEquals(-1,(itp.evaluate(itp.infixToPostfix(infix))));
-		infix = "(100 / 04) * 5";
-		assertEquals(125,(itp.evaluate(itp.infixToPostfix(infix))));
+		infix = "(-100 / 4) * 5";
+		assertEquals(-125,(itp.evaluate(itp.infixToPostfix(infix))));
 
 
 

@@ -69,7 +69,7 @@ public boolean validInput(String infix)
                 paranthesis.push('(');
                 if(i == infix.length()-1)
                     return false;
-                else if(isOperator(infix.charAt(i+1)) )
+                else if(isOperator(infix.charAt(i+1)) && infix.charAt(i+1) !='-' )
                     return false ;
                 else  if (infix.charAt(i+1) == ')') // empty paranthersis
                     return false;
@@ -107,9 +107,12 @@ public String convertToPostfix(String infix)
 {
 	String postfix = "";
 	Stack symbols = new Stack();
-	if(validInput(infix) == false)
-        System.out.println("Invalid input");
+	if(validInput(infix) == false) {
 
+        System.out.println("Invalid input");
+        System.exit(0);
+
+    }
 	/*HANDLING EMPTY STRING CASE */
 	/*HANDLING  STRING with invalid start */
 	/*HANDLING WITH PARANTHESIS UNORGANIZED INPUT*/
@@ -221,7 +224,13 @@ public String infixToPostfix(String expression)
 			expression.push((double)Integer.parseInt(tmp));
 		}else if (isOperator(postfix.charAt(i)))
 		{
-
+            if(expression.size()<2 && postfix.charAt(i) == '-')
+            {
+                 double tmp = ( (double)expression.peek() * -1);
+                 expression.pop();
+                 expression.push(tmp);
+                 continue;
+            }
 			double x = (double) expression.pop();
 			double y = (double)expression.pop();
 			switch(postfix.charAt(i))
@@ -244,6 +253,7 @@ public String infixToPostfix(String expression)
 					break;
 				default : // can not happen
 					System.out.println("Error occured");
+					return -1;
 			}
 
 		}else
@@ -254,57 +264,16 @@ public String infixToPostfix(String expression)
 		}
 
 	}
-	result =(int) Math.abs((Double) expression.pop());
-	return result;
+	if((Double) expression.peek() < 0) {
+        result = (int) Math.abs((Double) expression.pop());
+        return -1 * result;
+    }else
+    {
+        result = (int) Math.abs((Double) expression.pop());
+        return  result;
+    }
 }
-/*
-public int evaluate(String postfix)
-{
-	int result=0;
-	Stack expression = new Stack();
-	for(int i =0 ;i<postfix.length() ;i++)
-	{
-		if(isOperator(postfix.charAt(i)) == false && Character.isLetter((char)postfix.charAt(i) ) == false )
-		{
-			expression.push(Character.getNumericValue(postfix.charAt(i)));
-		}else if (isOperator(postfix.charAt(i)))
-		{
-			int x = (int) expression.pop();
-			int y = (int)expression.pop();
-				switch(postfix.charAt(i))
-				{
-				case '+':
-					expression.push(x+y); //Character.forDigit(a,10);
-					break;
-				case '-':
-					expression.push(y-x);
-					break;
-				case '*':
-					expression.push(x*y);
-					break;
-				case '/':
-					if(x == 0){
-					System.out.println("Division by zero is not allowed");
-					return -1;
-					}
-					expression.push(y/x);
-					break;
-				default : // can not happen
-					System.out.println("Error occured");					
-				}
-			
-		}else
-		{
-			System.out.println("Error occured \nYour expressions can not be evaluated ");
-			return -1;
 
-		}
-			
-	}
-	result =(int) expression.pop();
-	return result;
-}
-*/
 	
 	
 	
