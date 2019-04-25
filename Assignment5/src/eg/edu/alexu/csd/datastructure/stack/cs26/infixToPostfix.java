@@ -227,8 +227,9 @@ public String infixToPostfix(String expression)
 			expression.push((double)Integer.parseInt(tmp));
 		}else if (isOperator(postfix.charAt(i)))
 		{
-            if(expression.size()<2 && postfix.charAt(i) == '-')
+            if((expression.size()<2 && postfix.charAt(i) == '-') || (postfix.charAt(i) == '-' &&isLowerPriority(postfix.charAt(i),postfix.charAt(i))))
             {
+
                  double tmp = ( (double)expression.peek() * -1);
                  expression.pop();
                  expression.push(tmp);

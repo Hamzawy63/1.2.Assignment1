@@ -35,16 +35,23 @@ public class InfiixToPostfixTest {
 		  assertEquals("1 2 + 7 *",(itp.infixToPostfix(infix)));
 		  infix = "2 + 3 * 4";
 		  assertEquals("2 3 4 * +",(itp.infixToPostfix(infix)));
-		 //(a / (b - c + d)) * (e - a) * c
+		 //a / b - c + d * e - a * c
 		  infix = "(a / (b - c + d)) * (e - a) * c";
 		  assertEquals("a b c - d + / e a - * c *",(itp.infixToPostfix(infix)));
-		
+		infix = "a / b - c + d * e - a * c";
+		assertEquals("a b / c - d e * + a c * -",(itp.infixToPostfix(infix)));
+		infix = "100 +50  * (-5)";
+		assertEquals("100 50 5 - * +",(itp.infixToPostfix(infix)));
+		infix = "(-100  + -4) * 5";
+		assertEquals("100 - + 4 - 5 *",(itp.infixToPostfix(infix)));
 	}
 
 	@Test
 	public void test2() {
 		infixToPostfix itp = new infixToPostfix();
 		String infix;
+		infix = "100 +50  * (-5)";
+		assertEquals(-150,(itp.evaluate(itp.infixToPostfix(infix))));
 		infix = "2 + 3 * 4"; ///  out :	A B + C + D +
 		assertEquals(14,(itp.evaluate(itp.infixToPostfix(infix))));
 		infix = "(1 + 2) * 7";
@@ -55,6 +62,8 @@ public class InfiixToPostfixTest {
 		assertEquals(-1,(itp.evaluate(itp.infixToPostfix(infix))));
 		infix = "(-100 / 4) * 5";
 		assertEquals(-125,(itp.evaluate(itp.infixToPostfix(infix))));
+
+
 
 
 
