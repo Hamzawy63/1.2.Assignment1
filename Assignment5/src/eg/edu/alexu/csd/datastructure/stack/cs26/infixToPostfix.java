@@ -227,10 +227,9 @@ public String infixToPostfix(String expression)
 			expression.push((double)Integer.parseInt(tmp));
 		}else if (isOperator(postfix.charAt(i)))
 		{
-            if((expression.size()<2 && postfix.charAt(i) == '-') || (postfix.charAt(i) == '-' &&isLowerPriority(postfix.charAt(i),postfix.charAt(i))))
+            if((postfix.charAt(i) == '-')&&(expression.size()<2 || ((i!= postfix.length()-2) &&isLowerPriority(postfix.charAt(i),postfix.charAt(i+2))) ) )
             {
-
-                 double tmp = ( (double)expression.peek() * -1);
+            	double tmp = ( (double)expression.peek() * -1);
                  expression.pop();
                  expression.push(tmp);
                  continue;
