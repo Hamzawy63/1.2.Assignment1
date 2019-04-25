@@ -18,26 +18,26 @@ public class InfiixToPostfixTest {
 		 infixToPostfix itp = new infixToPostfix();
 		 String infix;
 		  infix = "A +B + C+ D"; ///  out :	A B + C + D +
-		  assertEquals("A B + C + D + ",(itp.infixToPostfix(infix)));
+		  assertEquals("A B + C + D +",(itp.infixToPostfix(infix)));
 		  infix = "(A + B) * (C + D)";
-		  assertEquals("A B + C D + * ",(itp.infixToPostfix(infix)));
+		  assertEquals("A B + C D + *",(itp.infixToPostfix(infix)));
 		  infix = "A + B * C + D";
-		  assertEquals("A B C * + D + ",(itp.infixToPostfix(infix)));
+		  assertEquals("A B C * + D +",(itp.infixToPostfix(infix)));
 		  infix = "A * B + C * D"; //<<<<
-		  assertEquals("A B * C D * + " ,(itp.infixToPostfix(infix)));
+		  assertEquals("A B * C D * +" ,(itp.infixToPostfix(infix)));
 		  infix = " ";
 		  assertEquals("",(itp.infixToPostfix(infix)));
 		  infix = "(((A+B)*C)-((D-E)*(F+G)))";
-		  assertEquals("A B + C * D E - F G + * - ",(itp.infixToPostfix(infix)));
+		  assertEquals("A B + C * D E - F G + * -",(itp.infixToPostfix(infix)));
 		  infix = "a / b - c + d * e - a * c";
-		  assertEquals("a b / c - d e * + a c * - ",(itp.infixToPostfix(infix)));
+		  assertEquals("a b / c - d e * + a c * -",(itp.infixToPostfix(infix)));
 		  infix = "(1 + 2) * 7";
-		  assertEquals("1 2 + 7 * ",(itp.infixToPostfix(infix)));
+		  assertEquals("1 2 + 7 *",(itp.infixToPostfix(infix)));
 		  infix = "2 + 3 * 4";
-		  assertEquals("2 3 4 * + ",(itp.infixToPostfix(infix)));
+		  assertEquals("2 3 4 * +",(itp.infixToPostfix(infix)));
 		 //(a / (b - c + d)) * (e - a) * c
 		  infix = "(a / (b - c + d)) * (e - a) * c";
-		  assertEquals("a b c - d + / e a - * c * ",(itp.infixToPostfix(infix)));
+		  assertEquals("a b c - d + / e a - * c *",(itp.infixToPostfix(infix)));
 		
 	}
 

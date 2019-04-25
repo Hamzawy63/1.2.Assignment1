@@ -183,6 +183,9 @@ public String convertToPostfix(String infix)
 		postfix+= symbols.pop();
 		postfix += " ";
 	}
+	if(postfix.length() == 0)
+		return postfix;
+	postfix =  postfix.substring(0,postfix.length()-1);
 	return postfix;
 }
 
