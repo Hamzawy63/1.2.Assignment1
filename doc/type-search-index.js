@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"eg.edu.alexu.csd.datastructure.stack.cs26","l":"infixToPostfix"}]
