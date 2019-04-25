@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class myMain {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {    	
+    	
 		System.out.println("Simple USER interface for testing stack");
 		System.out.println("Press 1 to push an element in the stack");
 		System.out.println("Press 2 to pop an element in the stack");
@@ -54,9 +55,11 @@ public class myMain {
 			System.out.println("Press -1 to end");
 			System.out.println("==============================================");
 		}
+		
 	}
-    
+   
 }
+//(a / (b - c + d)) * (e - a) * c
 /**
  // >> ALL THOSE CASES GENERATED CORRECT ANSWER
  infixToPostfix itp = new infixToPostfix();
@@ -80,4 +83,5 @@ public class myMain {
  System.out.println(itp.convertToPostfix(infix));
  String wrong = "A&B";
  System.out.println(itp.convertToPostfix(wrong));
+ 
  **/

@@ -169,8 +169,24 @@ public String convertToPostfix(String infix)
 	
 	
 	
-	
 	return postfix;
+}
+
+/**
+ * @param infix the string the user entered
+ * @return  postfix expression 
+ */
+public String infixToPostfix(String expression)
+{
+	return convertToPostfix(expression);
+}
+/**
+ * @param  postfix expression 
+ * @return the value of the expression
+ */
+public int evaluate(String expression)
+{
+	return 0;	
 }
 	
 	
