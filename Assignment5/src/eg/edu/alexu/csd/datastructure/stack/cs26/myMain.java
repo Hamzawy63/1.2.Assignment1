@@ -1,11 +1,16 @@
 package eg.edu.alexu.csd.datastructure.stack.cs26;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class myMain {
 
-    public static void main(String[] args) {    	
-    	
+    public static void main(String[] args) {
+    	infixToPostfix ptr = new infixToPostfix();
+
+		//System.out.println(ptr.infixToPostfix("-(x++y)"));
+		System.out.println(ptr.evaluate(ptr.infixToPostfix("10+2")));
+
 		System.out.println("Simple USER interface for testing stack");
 		System.out.println("Press 1 to push an element in the stack");
 		System.out.println("Press 2 to pop an element in the stack");
@@ -60,6 +65,7 @@ public class myMain {
  /**
 	public static void main(String[] args )
 	{
+
 		// >> ALL THOSE CASES GENERATED CORRECT ANSWER
 		 infixToPostfix itp = new infixToPostfix();
 		 String infix1 = "(A+B/C*(D+E)-F)";

@@ -1,4 +1,7 @@
 package eg.edu.alexu.csd.datastructure.stack.cs26;
+import java.util.regex.*;
+
+import static java.lang.Character.isLetterOrDigit;
 
 /**
  * Person
@@ -54,6 +57,7 @@ public boolean isOperator(char x)
  * @param infix the string the user entered
  * @return true if there is no problems (e.g. all parentheses are closed..)
  */
+//Stack myTmpStack = new Stack();
 public boolean validInput(String infix)
 {
 	Stack paranthesis = new Stack();
@@ -98,6 +102,7 @@ public boolean validInput(String infix)
  * @param infix the string the user entered
  * @return  postfix expression 
  */
+
 public String convertToPostfix(String infix)
 {
 	String postfix = "";
@@ -111,7 +116,7 @@ public String convertToPostfix(String infix)
 
 	for(int i =0 ;i<infix.length();i++ )
 	{
-		if(infix.charAt(i) == ' ' )
+		if(infix.charAt(i) == ' ' || (infix.charAt(i) == '\t' ))
 		{
 			continue;
 		}
@@ -121,7 +126,16 @@ public String convertToPostfix(String infix)
 		}
 		else if(!(isSymbol(infix.charAt(i)))) ///  then it is digit e.g 1 ,2 , 3 
 		{
-			postfix += infix.charAt(i);
+			int j=0;
+			for( j =i ;j<infix.length() && !(isSymbol(infix.charAt(j))) ;j++  )
+			{
+				if(infix.charAt(j) == ' ')
+					continue;
+				postfix += infix.charAt(j);
+			}
+
+			postfix += " ";
+			i = j-1;
 		}
 		else
 		{
@@ -138,6 +152,7 @@ public String convertToPostfix(String infix)
 					while((char)symbols.peek() != '(')
 					{
 						postfix = postfix + symbols.pop();
+						postfix += " ";
 
 						if((char )symbols.peek() == '(')
 							break; /// so that if there is more than one paranthesis
@@ -148,6 +163,7 @@ public String convertToPostfix(String infix)
 					while(!(symbols.isEmpty()) && isLowerPriority(infix.charAt(i),(char)symbols.peek()) )
 					{
 						postfix = postfix +  symbols.pop();
+						postfix += " ";
 					}
 					symbols.push(infix.charAt(i));
 					// then pop until we reach stability
@@ -162,6 +178,7 @@ public String convertToPostfix(String infix)
 	while(symbols.isEmpty() == false)
 	{
 		postfix+= symbols.pop();
+		postfix += " ";
 	}
 	return postfix;
 }
@@ -178,6 +195,69 @@ public String infixToPostfix(String expression)
  * @param  postfix expression 
  * @return the value of the expression
  */
+
+
+
+
+	public int evaluate(String postfix)
+	{
+		int result=0;
+	Stack expression = new Stack();
+	for(int i =0 ;i<postfix.length() ;i++)
+	{
+		if(postfix.charAt(i) == ' ')
+			continue;
+		if(isOperator(postfix.charAt(i)) == false && Character.isLetter((char)postfix.charAt(i) ) == false )
+		{
+			/// then it is a digit ....
+			String tmp ="";
+			int j =0;
+			for(j = i; isLetterOrDigit(postfix.charAt(j)) && postfix.charAt(j)!= ' '  ;j++)
+			{
+				tmp += postfix.charAt(j);
+			}
+			i = j-1;
+
+			expression.push((double)Integer.parseInt(tmp));
+		}else if (isOperator(postfix.charAt(i)))
+		{
+
+			double x = (double) expression.pop();
+			double y = (double)expression.pop();
+			switch(postfix.charAt(i))
+			{
+				case '+':
+					expression.push(x+y); //Character.forDigit(a,10);
+					break;
+				case '-':
+					expression.push(y-x);
+					break;
+				case '*':
+					expression.push(x*y);
+					break;
+				case '/':
+					if(x == 0){
+						System.out.println("Division by zero is not allowed");
+						return -1;
+					}
+					expression.push(y/x);
+					break;
+				default : // can not happen
+					System.out.println("Error occured");
+			}
+
+		}else
+		{
+			System.out.println("Error occured \nYour expressions can not be evaluated ");
+			return -1;
+
+		}
+
+	}
+	result =(int) Math.abs((Double) expression.pop());
+	return result;
+}
+/*
 public int evaluate(String postfix)
 {
 	int result=0;
@@ -224,7 +304,7 @@ public int evaluate(String postfix)
 	result =(int) expression.pop();
 	return result;
 }
-	
+*/
 	
 	
 	
