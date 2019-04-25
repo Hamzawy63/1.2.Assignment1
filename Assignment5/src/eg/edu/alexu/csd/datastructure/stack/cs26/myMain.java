@@ -57,31 +57,37 @@ public class myMain {
 		}
 		
 	}
-   
+ /**
+	public static void main(String[] args )
+	{
+		// >> ALL THOSE CASES GENERATED CORRECT ANSWER
+		 infixToPostfix itp = new infixToPostfix();
+		 String infix1 = "(A+B/C*(D+E)-F)";
+		 System.out.println(itp.convertToPostfix(infix1));
+		 String infix2 = "((A+B)-C*(D/E))+F";
+		 System.out.println(itp.convertToPostfix(infix2));
+		 String infix3 = "A +B + C+ D"; ///  out :	A B + C + D +
+		 System.out.println(itp.convertToPostfix(infix3));
+		 String infix4 = "(A + B) * (C + D)"; // out :	A B + C D + *
+		 System.out.println(itp.convertToPostfix(infix4));
+		 String infix5 = "A + B * C + D"; // out : 	A B C * + D +
+		 System.out.println(itp.convertToPostfix(infix5));
+		 String infix6 = "A * B + C * D"; // out : A B * C D * +
+		 System.out.println(itp.convertToPostfix(infix6));
+		 String infix7 = "A * B + C * D"; // out : A B * C D * +
+		 System.out.println(itp.convertToPostfix(infix7));
+		 String infix8 = " "; // out no response
+		 System.out.println(itp.convertToPostfix(infix8));
+		 String infix = "(((A+B)*C)-((D-E)*(F+G)))";  // out : AB+C*DE-FG+*-
+		 System.out.println(itp.convertToPostfix(infix));
+		 String wrong = "2 + 3 * 4";
+		 System.out.println(itp.convertToPostfix(wrong));
+		 System.out.println(itp.evaluate("72/3-42*+"));
+		 
+		
+	}
+  **/
+	
 }
-//(a / (b - c + d)) * (e - a) * c
-/**
- // >> ALL THOSE CASES GENERATED CORRECT ANSWER
- infixToPostfix itp = new infixToPostfix();
- String infix1 = "(A+B/C*(D+E)-F)";
- System.out.println(itp.convertToPostfix(infix1));
- String infix2 = "((A+B)-C*(D/E))+F";
- System.out.println(itp.convertToPostfix(infix2));
- String infix3 = "A +B + C+ D"; ///  out :	A B + C + D +
- System.out.println(itp.convertToPostfix(infix3));
- String infix4 = "(A + B) * (C + D)"; // out :	A B + C D + *
- System.out.println(itp.convertToPostfix(infix4));
- String infix5 = "A + B * C + D"; // out : 	A B C * + D +
- System.out.println(itp.convertToPostfix(infix5));
- String infix6 = "A * B + C * D"; // out : A B * C D * +
- System.out.println(itp.convertToPostfix(infix6));
- String infix7 = "A * B + C * D"; // out : A B * C D * +
- System.out.println(itp.convertToPostfix(infix7));
- String infix8 = " "; // out no response
- System.out.println(itp.convertToPostfix(infix8));
- String infix = "(((A+B)*C)-((D-E)*(F+G)))";  // out : AB+C*DE-FG+*-
- System.out.println(itp.convertToPostfix(infix));
- String wrong = "A&B";
- System.out.println(itp.convertToPostfix(wrong));
+
  
- **/

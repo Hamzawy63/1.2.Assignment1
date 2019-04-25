@@ -5,7 +5,7 @@ package eg.edu.alexu.csd.datastructure.stack.cs26;
  * Created on July,4,2019
  * @author Hamza Hassan <a href ="https://www.facebook.com/profile.php?id=100008794203326">Click for Facebook</a>
  */
-public class infixToPostfix {
+public class infixToPostfix implements IExpressionEvaluator {
 /**
  * we use it to make it easy for determining the priority in the stack
  * @param x a symbol character 
@@ -163,17 +163,11 @@ public String convertToPostfix(String infix)
 	{
 		postfix+= symbols.pop();
 	}
-	
-	
-	
-	
-	
-	
 	return postfix;
 }
 
 /**
- * @param infix the string the user entered
+ * @param expression the string the user entered
  * @return  postfix expression 
  */
 public String infixToPostfix(String expression)
@@ -184,9 +178,51 @@ public String infixToPostfix(String expression)
  * @param  postfix expression 
  * @return the value of the expression
  */
-public int evaluate(String expression)
+public int evaluate(String postfix)
 {
-	return 0;	
+	int result=0;
+	Stack expression = new Stack();
+	for(int i =0 ;i<postfix.length() ;i++)
+	{
+		if(isOperator(postfix.charAt(i)) == false && Character.isLetter((char)postfix.charAt(i) ) == false )
+		{
+			expression.push(Character.getNumericValue(postfix.charAt(i)));
+		}else if (isOperator(postfix.charAt(i)))
+		{
+			int x = (int) expression.pop();
+			int y = (int)expression.pop();
+				switch(postfix.charAt(i))
+				{
+				case '+':
+					expression.push(x+y); //Character.forDigit(a,10);
+					break;
+				case '-':
+					expression.push(y-x);
+					break;
+				case '*':
+					expression.push(x*y);
+					break;
+				case '/':
+					if(x == 0){
+					System.out.println("Division by zero is not allowed");
+					return -1;
+					}
+					expression.push(y/x);
+					break;
+				default : // can not happen
+					System.out.println("Error occured");					
+				}
+			
+		}else
+		{
+			System.out.println("Error occured \nYour expressions can not be evaluated ");
+			return -1;
+
+		}
+			
+	}
+	result =(int) expression.pop();
+	return result;
 }
 	
 	
